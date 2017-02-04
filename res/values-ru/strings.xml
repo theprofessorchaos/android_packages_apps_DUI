@@ -73,4 +73,5 @@
 
   <string name="label_action_one_handed_mode_left">Режим одной руки (слева)</string>
   <string name="label_action_one_handed_mode_right">Режим одной руки (справа)</string>
+  <string name="label_action_split_screen">Разделение экрана</string>
 </resources>
