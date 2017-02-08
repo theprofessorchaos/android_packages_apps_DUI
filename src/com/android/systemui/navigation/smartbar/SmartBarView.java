@@ -597,6 +597,8 @@ public class SmartBarView extends BaseNavigationBar {
             buttonConfig = buttonConfigs.get(j);
             OpaLayout v = SmartBarHelper.generatePrimaryKey(getContext(), this, landscape, buttonConfig);
             SmartBarHelper.updateButtonSize(v, dimen, landscape);
+            SmartButtonView sb = v.getButton();
+            SmartBarHelper.updateButtonSize(sb, dimen, landscape);
             SmartBarHelper.addViewToRoot(navButtonLayout, v, landscape);
 
             // only add once for master sequence holder

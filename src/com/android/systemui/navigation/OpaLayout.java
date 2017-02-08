@@ -110,6 +110,7 @@ public class OpaLayout extends FrameLayout {
             public void run() {
                 cancelCurrentAnimation();
                 startRetractAnimation();
+                setOpaVisibility(false);
             }
         };
         mAnimationState = OpaLayout.ANIMATION_STATE_NONE;
@@ -117,6 +118,7 @@ public class OpaLayout extends FrameLayout {
     }
 
     private void startAll(ArraySet<Animator> animators) {
+        setOpaVisibility(true);
         for(int i=0; i < animators.size(); i++) {
             Animator curAnim = (Animator) mCurrentAnimators.valueAt(i);
             curAnim.start();
@@ -227,6 +229,7 @@ public class OpaLayout extends FrameLayout {
             public void onAnimationEnd(final Animator animator) {
                 mCurrentAnimators.clear();
                 mAnimationState = OpaLayout.ANIMATION_STATE_NONE;
+                setOpaVisibility(false);
             }
         });
         return set;
@@ -395,6 +398,8 @@ public class OpaLayout extends FrameLayout {
         mYellow = findViewById(R.id.yellow);
         mGreen = findViewById(R.id.green);
         mSmartButton = findViewById(R.id.smartbutton);
+
+        setOpaVisibility(false);
     }
 
     public SmartButtonView getButton() {
@@ -405,51 +410,47 @@ public class OpaLayout extends FrameLayout {
         mEditMode = enabled;
     }
 
-    public boolean onInterceptTouchEvent(MotionEvent ev) {
+    public void startDownAction() {
         if (!mOpaEnabled || mEditMode) {
-            return false;
+            return;
         }
-        switch (ev.getAction()) {
-            case MotionEvent.ACTION_DOWN: {
-                if (!mCurrentAnimators.isEmpty()) {
-                    if (mAnimationState != OpaLayout.ANIMATION_STATE_RETRACT) {
-                        return false;
-                    }
-                    endCurrentAnimation();
-                }
-                mStartTime = SystemClock.elapsedRealtime();
-                mLongClicked = false;
-                mIsPressed = true;
-                startDiamondAnimation();
-                removeCallbacks(mCheckLongPress);
-                postDelayed(mCheckLongPress, (long)ViewConfiguration.getLongPressTimeout());
-                return false;
+        if (!mCurrentAnimators.isEmpty()) {
+            if (mAnimationState != OpaLayout.ANIMATION_STATE_RETRACT) {
+                return;
             }
-            case MotionEvent.ACTION_UP:
-            case MotionEvent.ACTION_CANCEL: {
-                if (mAnimationState == OpaLayout.ANIMATION_STATE_DIAMOND) {
-                    final long elapsedRealtime = SystemClock.elapsedRealtime();
-                    removeCallbacks(mRetract);
-                    postDelayed(mRetract, 100L - (elapsedRealtime - mStartTime));
-                    removeCallbacks(mCheckLongPress);
-                    return false;
-                }
-                int n;
-                if (!mIsPressed || mLongClicked) {
-                    n = 0;
-                }
-                else {
-                    n = 1;
-                }
-                mIsPressed = false;
-                if (n != 0) {
-                    mRetract.run();
-                    return false;
-                }
-                break;
-            }
+            endCurrentAnimation();
         }
-        return false;
+        mStartTime = SystemClock.elapsedRealtime();
+        mLongClicked = false;
+        mIsPressed = true;
+        startDiamondAnimation();
+        removeCallbacks(mCheckLongPress);
+        postDelayed(mCheckLongPress, (long)ViewConfiguration.getLongPressTimeout());
+    }
+
+    public void startCancelAction() {
+        if (!mOpaEnabled || mEditMode) {
+            return;
+        }
+        if (mAnimationState == OpaLayout.ANIMATION_STATE_DIAMOND) {
+            final long elapsedRealtime = SystemClock.elapsedRealtime();
+            removeCallbacks(mRetract);
+            postDelayed(mRetract, 100L - (elapsedRealtime - mStartTime));
+            removeCallbacks(mCheckLongPress);
+            return;
+        }
+        int n;
+        if (!mIsPressed || mLongClicked) {
+            n = 0;
+        }
+        else {
+            n = 1;
+        }
+        mIsPressed = false;
+        if (n != 0) {
+            mRetract.run();
+            return;
+        }
     }
 
     public void setLandscape(boolean landscape) {
@@ -469,6 +470,9 @@ public class OpaLayout extends FrameLayout {
 
     public void setOpaEnabled(boolean enabled) {
         mOpaEnabled = enabled;
+    }
+
+    public void setOpaVisibility(boolean enabled) {
         int visibility = enabled ? View.VISIBLE : View.INVISIBLE;
         mBlue.setVisibility(visibility);
         mRed.setVisibility(visibility);

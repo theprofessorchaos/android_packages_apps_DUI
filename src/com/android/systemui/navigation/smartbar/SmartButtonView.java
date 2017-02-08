@@ -273,6 +273,11 @@ public class SmartButtonView extends ImageView {
     }
 
     public boolean onTouchEvent(MotionEvent ev) {
+        OpaLayout opa = null;
+        if (getParent() != null && getParent() instanceof OpaLayout) {
+            opa = (OpaLayout)getParent();
+        }
+
         if (mInEditMode) {
             return false;
         }
@@ -281,6 +286,9 @@ public class SmartButtonView extends ImageView {
         switch (action) {
             case MotionEvent.ACTION_DOWN:
                 setPressed(true);
+                if (opa != null) {
+                    opa.startDownAction();
+                }
                 checkAndDoFlipAnim();
                 if (mSpring != null) {
                     mSpring.setEndValue(1f);
@@ -310,6 +318,9 @@ public class SmartButtonView extends ImageView {
                 wasConsumed = true;
                 isDoubleTapPending = false;
                 setPressed(false);
+                if (opa != null) {
+                    opa.startCancelAction();
+                }
                 if (mSpring != null) {
                     mSpring.setEndValue(0f);
                 }
@@ -317,6 +328,9 @@ public class SmartButtonView extends ImageView {
             case MotionEvent.ACTION_UP:
                 setPressed(false);
                 checkAndDoFlipAnim();
+                if (opa != null) {
+                    opa.startCancelAction();
+                }
                 if (mSpring != null) {
                     mSpring.setEndValue(0f);
                 }
