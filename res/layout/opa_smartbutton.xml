@@ -18,13 +18,13 @@
     xmlns:systemui="http://schemas.android.com/apk/res-auto"
     android:clipChildren="false"
     android:clipToPadding="false"
-    android:layout_width="@dimen/navigation_key_width"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_weight="0.0"
     android:paddingStart="@dimen/navigation_key_padding"
     android:paddingEnd="@dimen/navigation_key_padding" >
 
-    <RelativeLayout android:layout_width="@dimen/match_parent" android:layout_height="match_parent">
+    <RelativeLayout android:layout_width="match_parent" android:layout_height="match_parent">
         <ImageView android:id="@+id/red" android:src="@drawable/ic_sysbar_opa_red" android:importantForAccessibility="no" style="@style/DotStyle" />
         <ImageView android:id="@+id/blue" android:src="@drawable/ic_sysbar_opa_blue" android:importantForAccessibility="no" style="@style/DotStyle" />
         <ImageView android:id="@+id/green" android:src="@drawable/ic_sysbar_opa_green" android:importantForAccessibility="no" style="@style/DotStyle" />
@@ -34,7 +34,7 @@
     <com.android.systemui.navigation.smartbar.SmartButtonView
         android:layout_gravity="center"
         android:id="@+id/smartbutton"
-        android:layout_width="@dimen/navigation_key_width"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="center" />
 
