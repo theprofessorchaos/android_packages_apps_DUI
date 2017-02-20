@@ -115,15 +115,21 @@ public class SmartBarHelper {
         v.setButtonConfig(config);
         int width = ctx.getResources().getDimensionPixelSize(R.dimen.navigation_key_width);
         int height = ctx.getResources().getDimensionPixelSize(R.dimen.navigation_key_height);
-        v.setLayoutParams(new FrameLayout.LayoutParams(
-                landscape && !BaseNavigationBar.sIsTablet ? LayoutParams.MATCH_PARENT
-                        : width, landscape && !BaseNavigationBar.sIsTablet ? height : LayoutParams.MATCH_PARENT));
         v.loadRipple();
         updateButtonScalingAndPadding(opa, landscape);
         host.setButtonDrawable(v);
-        opa.setLayoutParams(new LinearLayout.LayoutParams(
-                landscape && !BaseNavigationBar.sIsTablet ? LayoutParams.MATCH_PARENT
-                        : width, landscape && !BaseNavigationBar.sIsTablet ? height : LayoutParams.MATCH_PARENT));
+        if (BaseNavigationBar.sIsTablet) {
+            v.setLayoutParams(new FrameLayout.LayoutParams(width, LayoutParams.MATCH_PARENT));
+            opa.setLayoutParams(new LinearLayout.LayoutParams(width, LayoutParams.MATCH_PARENT));
+        } else {
+            if (landscape) {
+                v.setLayoutParams(new FrameLayout.LayoutParams(LayoutParams.MATCH_PARENT, height));
+                opa.setLayoutParams(new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, height));
+            } else {
+                v.setLayoutParams(new FrameLayout.LayoutParams(width, LayoutParams.MATCH_PARENT));
+                opa.setLayoutParams(new LinearLayout.LayoutParams(width, LayoutParams.MATCH_PARENT));
+            }
+        }
         return opa;
     }
 
