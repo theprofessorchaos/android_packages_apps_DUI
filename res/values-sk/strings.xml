@@ -19,26 +19,27 @@
   <!-- Bindable action labels -->
   <string name="label_action_no_action">Žiadna akcia</string>
   <string name="label_action_settings_panel">Panel nastavení</string>
-  <string name="label_action_notification_panel">Notifikačný panel</string>
+  <string name="label_action_notification_panel">Panel s upozorneniami</string>
   <string name="label_action_screenshot">Snímka obrazovky</string>
+  <string name="label_action_region_screenshot">Čiastočná snímka obraz.</string>
   <string name="label_action_screenrecord">Záznam obrazovky</string>
   <string name="label_action_expanded_desktop">Rozšírená plocha</string>
   <string name="label_action_screen_off">Vypnúť obrazovku</string>
   <string name="label_action_force_close_app">Vynútiť ukončenie aplikácie</string>
   <string name="label_action_search_assistant">Vyhľadávací asistent</string>
-  <string name="label_action_google_now_on_tap">Google Now On Tap</string>
+  <string name="label_action_google_now_on_tap">Google asistent</string>
   <string name="label_action_voice_search">Hlasové vyhľadávanie</string>
   <string name="label_action_in_app_search">Hľadať v aplikáciách</string>
-  <string name="label_action_flashlight">Baterka</string>
-  <string name="label_action_bluetooth">Bluetooth</string>
+  <string name="label_action_flashlight">Baterka zap./vyp.</string>
+  <string name="label_action_bluetooth">Bluetooth zap./vyp.</string>
   <string name="label_action_wifi">WiFi</string>
-  <string name="label_action_hotspot">Hotspot</string>
+  <string name="label_action_hotspot">Prístupový bod</string>
   <string name="label_action_last_app">Posledná aplikácia</string>
-  <string name="label_action_overview">Nedávne</string>
+  <string name="label_action_overview">Nedávne aplikácie</string>
   <string name="label_action_power_menu">Ponuka Vypnúť</string>
-  <string name="label_action_menu">Menu</string>
+  <string name="label_action_menu">Menu aplikácie</string>
   <string name="label_action_back">Späť</string>
-  <string name="label_action_home">Domovská stránka</string>
+  <string name="label_action_home">Domovská obrazovka</string>
   <string name="label_action_ime_switcher">Editor IME</string>
   <string name="label_action_stop_screenpinning">Vypnúť pripnutie obrazovky</string>
   <string name="label_action_ime_down">Vstupná metóda kurzor dolu</string>
@@ -48,6 +49,11 @@
   <string name="label_action_volume_panel">Panel hlasitosti</string>
   <string name="label_action_clear_notifications">Vymazať oznámenia</string>
   <string name="label_action_editing_smartbar">Smartbar editor</string>
+  <string name="label_action_split_screen">Rozdeliť obrazovku</string>
+  <string name="label_action_one_handed_mode_left">Režim jednou rukou (vľavo)</string>
+  <string name="label_action_one_handed_mode_right">Režim jednou rukou (vpravo)</string>
+  <string name="label_action_media_left">Predchádzajúca skladba</string>
+  <string name="label_action_media_right">Nasledujúca skladba</string>
   <!-- Smartbar -->
   <string name="label_smartbar_actions">Akcie</string>
   <string name="label_smartbar_icon">Ikona</string>
@@ -66,4 +72,6 @@
   <string name="smartbar_editor_toast_stopping">Zastavujúci navigačný editor</string>
   <string name="smartbar_editor_toast_unavailable">Navigačný editor nie je k dispozíci</string>
   <string name="edit_mode">Editačný režim</string>
+  <!-- App killed message -->
+  <string name="app_killed_message">Aplikácia %s bola ukončená</string>
 </resources>
